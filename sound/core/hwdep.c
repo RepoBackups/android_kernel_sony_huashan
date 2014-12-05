@@ -100,9 +100,10 @@ static int snd_hwdep_open(struct inode *inode, struct file * file)
 	if (hw == NULL)
 		return -ENODEV;
 
-	if (!try_module_get(hw->card->module)) {
-		snd_card_unref(hw->card);
+	if (!try_module_get(hw->card->module))
 		return -EFAULT;
+	{
+		snd_card_unref(hw->card);
 	}
 
 	init_waitqueue_entry(&wait, current);
